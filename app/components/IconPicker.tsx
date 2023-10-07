@@ -1,40 +1,25 @@
 "use client"
 
-import { useCallback ,useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import {BiLeftArrow,BiRightArrow} from "react-icons/bi";
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { FaUserEdit } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
-// ICONS
-import { AiOutlineClose } from "react-icons/ai";
-import { CiFries } from "react-icons/ci";
-import { FaCat, FaDog, FaDragon, FaRegCircle, FaUserEdit,FaBiohazard } from 'react-icons/fa';
-import { GiBalloonDog, GiBarefoot, GiBeard, GiBeaver, GiChickenOven, GiChainsaw, GiDragonfly } from 'react-icons/gi';
-import { GoLaw } from "react-icons/go";
-import { LiaDragonSolid } from "react-icons/lia";
-import { PiFlyingSaucerThin } from "react-icons/pi";
 
-function IconPicker() {
-    const icons = [
-        AiOutlineClose,
-        FaRegCircle,
-        FaCat,
-        FaDog,
-        GiBalloonDog,
-        GiBarefoot,
-        GiBeaver,
-        CiFries,
-        GiBeard,
-        GiChickenOven,
-        GiChainsaw,
-        PiFlyingSaucerThin,
-        LiaDragonSolid,
-        GiDragonfly,
-        FaDragon,
-        FaBiohazard,
-        GoLaw
-    ]
+
+interface IconPickerProps {
+    playerIcons:{1:IconType,2:IconType};
+    setPlayerIcons: Dispatch<SetStateAction<{ 1: any; 2: any; }>>;
+    icons:IconType[];
+}
+
+const IconPicker:React.FC<IconPickerProps> = ({
+    playerIcons,
+    setPlayerIcons,
+    icons
+}) => {
     const [colorPickerActive,setColorPickerActive] = useState(false);
-    const [playerIcons, setPlayerIcons] = useState({1:icons[0],2:icons[1]});
     const [selectedPlayer, setSelectedPlayer] = useState<1|2>(1);
     const [activePage,setActivePage] = useState(0)
 
