@@ -9,37 +9,59 @@ import EndGameMenu from './EndGameMenu';
 
 // ICONS
 import { AiOutlineClose } from "react-icons/ai";
+import { BiInjection } from "react-icons/bi";
 import { CiFries } from "react-icons/ci";
-import { FaBiohazard, FaCat, FaDog, FaDragon, FaRegCircle } from 'react-icons/fa';
-import { GiBalloonDog, GiBarefoot, GiBeard, GiBeaver, GiChainsaw, GiChickenOven, GiDragonfly,GiRobberMask } from 'react-icons/gi';
+import { FaBaby, FaBiohazard, FaCat, FaDog, FaDragon, FaHorse, FaRegCircle } from 'react-icons/fa';
+import { FaComputer, FaFrog} from 'react-icons/fa6';
+import { GiBabyBottle, GiBalloonDog, GiBarefoot, GiBeard, GiBeaver, GiChainsaw, GiChickenOven, GiChipsBag, GiDragonfly, GiNoseSide, GiRobberMask, GiSharkJaws, GiSquirrel, GiUnderwearShorts } from 'react-icons/gi';
 import { GoLaw } from "react-icons/go";
 import { ImEye } from "react-icons/im"
-import { LiaDragonSolid } from "react-icons/lia";
-import { PiFlyingSaucerThin,PiHandEye } from "react-icons/pi";
+import { LiaBeerSolid, LiaDragonSolid, LiaUserNurseSolid } from "react-icons/lia";
+import { MdOutlineBabyChangingStation } from "react-icons/md";
+import { PiBabyBold, PiFlyingSaucerThin,PiHandEye } from "react-icons/pi";
+import { RiVirusFill } from "react-icons/ri";
+import { SiLetsencrypt } from "react-icons/si";
 import { TbEyeglass2 } from "react-icons/tb";
 
 export default function Main() {
   const icons = [
     AiOutlineClose,
     FaRegCircle,
+    BiInjection,
     CiFries,
+    FaBaby,
     FaBiohazard,
     FaCat,
+    FaComputer,
     FaDog,
     FaDragon,
+    FaFrog,
+    FaHorse,
+    GiBabyBottle, 
     GiBalloonDog,
     GiBarefoot,
     GiBeard,
     GiBeaver,
     GiChainsaw,
     GiChickenOven,
+    GiChipsBag,
     GiDragonfly,
+    GiNoseSide,
     GiRobberMask,
+    GiSharkJaws,
+    GiSquirrel,
+    GiUnderwearShorts,
     GoLaw,
     ImEye,
+    LiaBeerSolid,
     LiaDragonSolid,
+    LiaUserNurseSolid,
+    MdOutlineBabyChangingStation,
+    PiBabyBold,
     PiFlyingSaucerThin,
     PiHandEye,
+    RiVirusFill,
+    SiLetsencrypt,
     TbEyeglass2,
 ]
 const [playerIcons, setPlayerIcons] = useState({1:icons[0],2:icons[1],"T":"T"});
