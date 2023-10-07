@@ -42,8 +42,8 @@ export default function Home() {
     PiHandEye,
     TbEyeglass2,
 ]
-const [playerIcons, setPlayerIcons] = useState({1:icons[0],2:icons[6]});
-const [winner,setWinner] = useState<undefined|1|2>(undefined);
+const [playerIcons, setPlayerIcons] = useState({1:icons[0],2:icons[6],"T":"T"});
+const [winner,setWinner] = useState<undefined|1|2|"T">(undefined);
 const [isPlaying,setIsPlaying] = useState<boolean>(false);
 const [tiles,setTiles] =  useState(Array(9).fill(null));
 const [points,setPoints] = useState({1:0,2:0,"T":0})

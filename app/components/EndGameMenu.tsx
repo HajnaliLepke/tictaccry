@@ -5,7 +5,7 @@ import { IconType } from "react-icons";
 
 interface EndGameMenuProps {
     setIsPlaying: Dispatch<SetStateAction<boolean>>;
-    winner:IconType;
+    winner:IconType | "T";
 }
 
 const EndGameMenu:React.FC<EndGameMenuProps> = ({setIsPlaying,winner:Winner}) => {
@@ -33,11 +33,18 @@ const EndGameMenu:React.FC<EndGameMenuProps> = ({setIsPlaying,winner:Winner}) =>
             rounded-3xl shadow-lg shadow-slate-950/80
             flex flex-col justify-evenly items-center
             `}
-            ><div className="flex flex-row items-center justify-center">
-
-                <Winner size={"7rem"}/>
-                <h3 className=' text-3xl  text-center'> WINS!!!</h3>
+            >
+            {Winner !== "T" 
+            ? 
+                <div className="flex flex-row items-center justify-center">
+                    <Winner size={"7rem"}/>
+                    <h3 className=' text-3xl  text-center'> WINS!!!</h3>
                 </div>
+            :    
+                <div className="flex flex-row items-center justify-center">
+                    <h3 className=' text-3xl  text-center'> It's a Tie</h3>
+                </div>
+            }
                     <h2 
                     className='cursor-pointer text-3xl border-2 shadow-xl rounded-full p-3 border-black bg-slate-700 text-slate-300 hover:scale-120 hover:border-4 transition-all hover:bg-slate-600'  
                     onClick={()=>{setIsPlaying(false)}}>

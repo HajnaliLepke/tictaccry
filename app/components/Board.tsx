@@ -8,7 +8,7 @@ import { IconType } from 'react-icons';
 
 interface BoardProps {
     playerIcons:{1:IconType,2:IconType};
-    setWinner:Dispatch<SetStateAction< 1 | 2 | undefined >>;
+    setWinner:Dispatch<SetStateAction< 1 | 2 | "T" | undefined >>;
     setIsPlaying:Dispatch<SetStateAction< boolean >>;
     tiles:IconType[];
     setTiles:Dispatch<SetStateAction< IconType[] >>;
@@ -67,7 +67,13 @@ const Board:React.FC<BoardProps> = ({
         
         return false; // NO IDENTICAL ROW/COLUMN/DIAGONAL WAS FOUND
   }
-  
+
+  function calculatTie(){
+    if(tiles.filter(t=>t !== null).length == tiles.length){
+        return true;
+    }
+    return false;
+  }
   
   function setTilesValue(index:number) {
     const newData = tiles.map((val, i)=>{
@@ -100,8 +106,11 @@ const Board:React.FC<BoardProps> = ({
     }
     if (tiles.filter(t => t !== null).length > 0){
         const hasWinner = calculatWinner();
+        const itsATie = calculatTie();
         if(hasWinner){
             setWinner(currentPlayer);
+        } else if(itsATie){
+            setWinner("T");
         } else {
             setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
         }

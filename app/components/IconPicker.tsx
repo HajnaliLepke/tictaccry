@@ -9,8 +9,8 @@ import { IconType } from 'react-icons';
 
 
 interface IconPickerProps {
-    playerIcons:{1:IconType,2:IconType};
-    setPlayerIcons: Dispatch<SetStateAction<{ 1: any; 2: any; }>>;
+    playerIcons:{1:IconType,2:IconType,"T":string};
+    setPlayerIcons: Dispatch<SetStateAction<{ 1: any; 2: any; "T":string}>>;
     icons:IconType[];
 }
 
@@ -29,7 +29,7 @@ const IconPicker:React.FC<IconPickerProps> = ({
 
     function newPlayerIconsValue(index:number,player:1|2|undefined){
         if (!player) {
-            var newData = {1:playerIcons[1],2:playerIcons[2]};
+            var newData = {1:playerIcons[1],2:playerIcons[2],"T":"T"};
             newData[selectedPlayer] = icons[index];
             setPlayerIcons(newData);
         }
