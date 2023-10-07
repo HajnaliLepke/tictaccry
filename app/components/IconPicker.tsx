@@ -38,7 +38,6 @@ const IconPicker:React.FC<IconPickerProps> = ({
     function changeActivePage(change:number) {
         const newActivePage = Math.min(Math.max(0,activePage+change),Math.ceil(icons.length/16)-1)
         
-        console.log(newActivePage);
         setActivePage(newActivePage);
     }
 
@@ -61,7 +60,7 @@ const IconPicker:React.FC<IconPickerProps> = ({
      {
         colorPickerActive && ( 
             <div className={`
-            fixed z-10           
+            fixed z-20           
             xl:h-[65%] xl:w-[45%] xl:top-[17.5%] xl:left-[27.5%]
             lg:h-[70%]  lg:w-[60%] lg:top-[15%] lg:left-[20%]
             md:h-[80%]  md:w-[80%] md:top-[10%] md:left-[10%]
@@ -90,7 +89,7 @@ const IconPicker:React.FC<IconPickerProps> = ({
                 onClick={()=>{setSelectedPlayer(2)}}
                 className={`
                 flex items-center justify-center col-span-2 
-                text-white text-2xl
+                text-2xl
                 cursor-pointer
                 ${selectedPlayer === 2 ? "font-bold scale-120 text-green-500 drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]"  : "text-white"}
                 `}>
