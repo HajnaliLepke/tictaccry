@@ -13,9 +13,6 @@ function Board() {
   const [tiles,setTiles] =  useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState<1|2>(1);
 
-//   const changeTileIcon(index) = useCallback(()=>{
-//     setTiles(value);
-//   },[]);
 
   function setTilesValue(index:number) {
     const newData = tiles.map((val, i)=>{
@@ -37,7 +34,6 @@ function Board() {
     <div className='
     l-1/6 t-1/6
     h-2/3 w-2/3
-    bg-slate-400
     '>
       <div className='
       grid grid-cols-3 grid-rows-3 gap-2 
@@ -53,7 +49,7 @@ function Board() {
         }
 
       </div>
-      <div className='flex flex-row items-stretch w-full pt-3'>
+      <div className='flex flex-row items-stretch w-full pt-3 mt-3'>
         <div className='flex flex-col items-center justify-center grow'>
             <div className='flex flex-row items-center justify-center gap-2'>
                 <h3 className='text-white text-3xl'>PLAYER</h3>
