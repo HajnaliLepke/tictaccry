@@ -104,6 +104,10 @@ const [isAIStronk,setIsAIStronk] = useState(false);
     }
   },[isPlaying]);
 
+  useEffect(()=>{
+    setPoints({1:0,2:0,"T":0});
+  },[isAI]);
+
   useEffect(
     () => {
       setIsLoading(false);

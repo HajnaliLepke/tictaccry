@@ -184,7 +184,7 @@ const Board:React.FC<BoardProps> = ({
         }
     }
 
-  },[tiles]);
+  },[tiles,points]);
 
   useEffect(()=>{
     if(currentPlayer === 2 && isAI){
