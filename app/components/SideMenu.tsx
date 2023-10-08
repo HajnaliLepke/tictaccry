@@ -239,12 +239,12 @@ const SideMenu:React.FC<SideMenuProps> = ({
                         <AiFillRobot size={"6rem"} style={{color: isAIStronk ? "#b91c1c" : "white"}}/>
                         {
                             isAIStronk && (
-                                <div className='bg-black w-[10px] h-[2px] rotate-45 absolute top-[1rem] left-[calc(3rem-15px)]'></div>
+                                <div className='bg-black w-[15px] h-[3px] rotate-45 absolute top-[1rem] left-[calc(3rem-16px)]'></div>
                             )
                         }
                         {
                             isAIStronk && (
-                                <div className='bg-black w-[10px] h-[2px] rotate-[-45deg] absolute top-[1rem] left-[calc(3rem+5px)]'></div>
+                                <div className='bg-black w-[15px] h-[3px] rotate-[-45deg] absolute top-[1rem] left-[calc(3rem+2px)]'></div>
                                 )
                             }
                     </div>    

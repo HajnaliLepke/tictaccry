@@ -24,6 +24,7 @@ import { RiVirusFill } from "react-icons/ri";
 import { SiLetsencrypt } from "react-icons/si";
 import { TbEyeglass2 } from "react-icons/tb";
 import { IconType } from 'react-icons';
+import ModeIndicator from './ModeIndicator';
 
 
 export default function Main() {
@@ -142,6 +143,10 @@ const [isAIStronk,setIsAIStronk] = useState(false);
         </div>
           )
         }
+        <ModeIndicator
+        isAI={isAI}
+        isAIStronk={isAIStronk}
+        />
 
       {
         winner ?  (
