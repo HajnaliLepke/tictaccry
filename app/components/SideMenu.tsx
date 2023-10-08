@@ -35,11 +35,14 @@ const SideMenu:React.FC<SideMenuProps> = ({
     const [activePage,setActivePage] = useState(0);
     const [settingsActive,setSettingsActive] = useState(false);    
 
+    
     const toggleColorPicker = useCallback(()=>{
+        setSettingsActive(false);
         setColorPickerActive((value) => !value );
     },[]);
-
+    
     const toggleSettings = useCallback(()=>{
+        setColorPickerActive(false);
         setSettingsActive((value) => !value );
     },[]);
 
