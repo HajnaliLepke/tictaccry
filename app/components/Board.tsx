@@ -95,10 +95,16 @@ const Board:React.FC<BoardProps> = ({
   }
 
   useEffect(()=>{
-    // console.log(tiles);
-    if(currentPlayer === 2 && tiles.filter(t => t !== null).length === 0){
-        setCurrentPlayer(1);
-    }
+    if(tiles.filter(t => t !== null).length === 0){ //Game was interupted
+       const sum = Object.values(points).reduce((acc,v)=>{return acc + v;},0);
+       if(sum % 2 === 0){
+            setCurrentPlayer(1);
+        }
+        else {
+            setCurrentPlayer(2);
+        }
+    } 
+
 
     if(tiles.filter(t => t !== null).length === 1){ //First round has been played
         setIsPlaying(true);
@@ -117,6 +123,7 @@ const Board:React.FC<BoardProps> = ({
     }
 
   },[tiles]);
+
   
   const PlayerIcon1 = playerIcons[1];
   const PlayerIcon2 = playerIcons[2];
