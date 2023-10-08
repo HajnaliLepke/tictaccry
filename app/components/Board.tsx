@@ -203,7 +203,7 @@ const Board:React.FC<BoardProps> = ({
             }
             return val;
         });
-        //setTiles(newData);
+        setTiles(newData);
         //setCurrentPlayer(1);
     }
   },[currentPlayer]);
