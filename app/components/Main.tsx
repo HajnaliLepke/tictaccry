@@ -104,10 +104,10 @@ const [isAIStronk,setIsAIStronk] = useState(false);
     }
   },[isPlaying]);
 
-  // useEffect(
-  //   () => {
-  //     setIsLoading(false);
-  //   },[]);
+  useEffect(
+    () => {
+      setIsLoading(false);
+    },[]);
 
   return (
     <div className='
