@@ -33,7 +33,7 @@ const Board:React.FC<BoardProps> = ({
   const [currentPlayer, setCurrentPlayer] = useState<1|2>(1);
 
   function takeARandomGuess(new_tiles:IconType[]){
-    const empties:any = new_tiles.map((t,i)=>{return t===null && i});
+    const empties:any = new_tiles.map((t,i)=>{if(t===null) {return i}}).filter(t=>typeof(t)==="number");
     const guess = empties[Math.floor(Math.random()*empties.length)];
     return guess;
   }    
@@ -41,89 +41,92 @@ const Board:React.FC<BoardProps> = ({
   function worldDominationNextLevel200IQApocalypseRobotMoveCalulator(new_tiles:IconType[]|null, player:1|2){
     const max_player = 2;
     const min_player = 1;
-    let best_move:{"position":number|null,"score":number} = {"position":null,"score":player === max_player ? Infinity : -Infinity};
+    let best_move:{"position":number|null,"score":number};
+    if (player === max_player){
+        best_move = {"position":null,"score":100}; 
+    } else {
+        best_move = {"position":null,"score":-100};
+    }
     if (!new_tiles){
         new_tiles = tiles;
     }
-    if (new_tiles.filter(t=>t===null).length > 7){ //First move, doesn't matter
-        let didntfindityet = true;
-        let move = Math.random()*9
-        while (didntfindityet){
-            move = Math.random()*9
-            if (tiles[move] === null){
-                didntfindityet = false
-            }
-        }
+    const possible_moves = new_tiles.map((t,i)=>{if(t===null) {return i}}).filter(t=>typeof(t)==="number");
+    if (possible_moves.length > 7){ //First move, doesn't matter
+        const move = takeARandomGuess(new_tiles);
         best_move["position"] = move;
+        console.log("Tippelni kell");
         return best_move;
         
     }
-    const possible_moves_length = new_tiles.filter(t=>t===null).length;
-    const isWinner = calculatWinner()
-    if (isWinner !== -1){
-        best_move["score"] = (isWinner === max_player ? 1 : -1) * (1 + possible_moves_length);
+    
+    const isWinner = calculatWinner(new_tiles);
+    if (isWinner !== -1){ // Someone already won
+        console.log("Valaki győzött");
+        best_move["score"] = (isWinner === max_player ? 1 : -1) * (1 + possible_moves.length);
         return best_move;
-    } else if (possible_moves_length === 0){
+    } else if (possible_moves.length === 0){ // No more possibilities && Nobody won === It's a Tie
+        console.log("Nyakkendő");
         best_move["score"] = 0;
         return best_move;
     }
-    for (let i = 0; i< new_tiles.length;i++){
-        if (new_tiles[i] === null){
-            const new_new_tiles = new_tiles.map((_t,index)=>{return index === i ? playerIcons[player] : _t });
-            let sim_score = worldDominationNextLevel200IQApocalypseRobotMoveCalulator(new_new_tiles,player === max_player ? min_player : max_player );
-            sim_score["position"] = i;
-            
-            if(player === max_player){ //MAX_PLAYER
-                if(sim_score!["score"] > best_move["score"]){
-                    best_move = sim_score!
-                }
-            } else {
-                if(sim_score!["score"] < best_move["score"]){
-                    best_move = sim_score!
-                }
+    for (let i = 0; i < possible_moves.length; i++){
+        const new_new_tiles = new_tiles.map((_t,index)=>{return index === i ? playerIcons[player] : _t });
+        //let sim_score = best_move;
+        let sim_score = worldDominationNextLevel200IQApocalypseRobotMoveCalulator(new_new_tiles,player === max_player ? min_player : max_player );
+        sim_score["position"] = i;
+        console.log("Megpróbáljuk: "+ i);
+        
+        if(player === max_player){ //MAX_PLAYER
+            if(sim_score!["score"] > best_move["score"]){
+                best_move = sim_score!
+            }
+        } else {
+            if(sim_score!["score"] < best_move["score"]){
+                best_move = sim_score!
             }
         }
-
+        
     }
+    console.log("Végén: "+ String(best_move));
     return best_move
 
   }
 
 
-  function calculatWinner(){
-        if (tiles[0]?.name && tiles[0]?.name === tiles[3]?.name && tiles[0]?.name === tiles[6]?.name){              //FIRST COLUMN
-            console.log('FIRST COLUMN');
-            return tiles[0]?.name === playerIcons[1].name ? 1 : 2;
+  function calculatWinner(calc_tiles:IconType[] = tiles){
+        if (calc_tiles[0]?.name && calc_tiles[0]?.name === calc_tiles[3]?.name && calc_tiles[0]?.name === calc_tiles[6]?.name){              //FIRST COLUMN
+            // console.log('FIRST COLUMN');
+            return calc_tiles[0]?.name === playerIcons[1].name ? 1 : 2;
         }
-        if (tiles[1]?.name && tiles[1]?.name === tiles[4]?.name && tiles[1]?.name === tiles[7]?.name){              //SECOND COLUMN
-            console.log('SECOND COLUMN');
-                return tiles[1]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[1]?.name && calc_tiles[1]?.name === calc_tiles[4]?.name && calc_tiles[1]?.name === calc_tiles[7]?.name){              //SECOND COLUMN
+            // console.log('SECOND COLUMN');
+                return calc_tiles[1]?.name === playerIcons[1].name ? 1 : 2;
         } 
-        if (tiles[2]?.name && tiles[2]?.name === tiles[5]?.name && tiles[2]?.name === tiles[8]?.name){              //THIRD COLUMN
-            console.log('THIRD COLUMN');
-                return tiles[2]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[2]?.name && calc_tiles[2]?.name === calc_tiles[5]?.name && calc_tiles[2]?.name === calc_tiles[8]?.name){              //THIRD COLUMN
+            // console.log('THIRD COLUMN');
+                return calc_tiles[2]?.name === playerIcons[1].name ? 1 : 2;
         }
         
-        if (tiles[0]?.name && tiles[0]?.name === tiles[1]?.name && tiles[0]?.name === tiles[2]?.name){             //FIRST ROW
-            console.log('FIRST ROW');
-            return tiles[0]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[0]?.name && calc_tiles[0]?.name === calc_tiles[1]?.name && calc_tiles[0]?.name === calc_tiles[2]?.name){             //FIRST ROW
+            // console.log('FIRST ROW');
+            return calc_tiles[0]?.name === playerIcons[1].name ? 1 : 2;
         }
-        if (tiles[3]?.name && tiles[3]?.name === tiles[4]?.name && tiles[3]?.name === tiles[5]?.name){             //SECOND ROW
-            console.log('SECOND ROW');
-            return tiles[3]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[3]?.name && calc_tiles[3]?.name === calc_tiles[4]?.name && calc_tiles[3]?.name === calc_tiles[5]?.name){             //SECOND ROW
+            // console.log('SECOND ROW');
+            return calc_tiles[3]?.name === playerIcons[1].name ? 1 : 2;
         }
-        if (tiles[6]?.name && tiles[6]?.name === tiles[7]?.name && tiles[6]?.name === tiles[8]?.name){             //THIRD ROW
-            console.log('THIRD ROW');
-            return tiles[6]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[6]?.name && calc_tiles[6]?.name === calc_tiles[7]?.name && calc_tiles[6]?.name === calc_tiles[8]?.name){             //THIRD ROW
+            // console.log('THIRD ROW');
+            return calc_tiles[6]?.name === playerIcons[1].name ? 1 : 2;
         }
         
-        if (tiles[0]?.name && tiles[0]?.name === tiles[4]?.name && tiles[0]?.name === tiles[8]?.name) {           //DIAGONALS-1
-            console.log('DIAGONALS 1');
-            return tiles[0]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[0]?.name && calc_tiles[0]?.name === calc_tiles[4]?.name && calc_tiles[0]?.name === calc_tiles[8]?.name) {           //DIAGONALS-1
+            // console.log('DIAGONALS 1');
+            return calc_tiles[0]?.name === playerIcons[1].name ? 1 : 2;
         }
-        if (tiles[2]?.name && tiles[2]?.name === tiles[4]?.name && tiles[2]?.name === tiles[6]?.name){           //DIAGONALS-2
-            console.log('DIAGONALS 2');
-            return tiles[2]?.name === playerIcons[1].name ? 1 : 2;
+        if (calc_tiles[2]?.name && calc_tiles[2]?.name === calc_tiles[4]?.name && calc_tiles[2]?.name === calc_tiles[6]?.name){           //DIAGONALS-2
+            // console.log('DIAGONALS 2');
+            return calc_tiles[2]?.name === playerIcons[1].name ? 1 : 2;
         }
         
         return -1; // NO IDENTICAL ROW/COLUMN/DIAGONAL WAS FOUND
@@ -183,24 +186,27 @@ const Board:React.FC<BoardProps> = ({
 
   },[tiles]);
 
-//   useEffect(()=>{
-//     if(currentPlayer === 2 && isAI){
-//         let move:number;
-//         // if (isAIStronk){
-//         //     move = worldDominationNextLevel200IQApocalypseRobotMoveCalulator(tiles,currentPlayer)["position"]!;
-//         // } else {
-//             move = takeARandomGuess(tiles);
-//         // }
-//         const newData = tiles.map((val, i)=>{
-//             if(i === move){
-//                 return playerIcons[currentPlayer];
-//             }
-//             return val;
-//         });
-//         setTiles(newData);
-//         setCurrentPlayer(1);
-//     }
-//   },[currentPlayer]);
+  useEffect(()=>{
+    if(currentPlayer === 2 && isAI){
+        // console.log("Gép jön!!!!!");
+        let move:number;
+        // if (isAIStronk){
+        //     move = worldDominationNextLevel200IQApocalypseRobotMoveCalulator(tiles,currentPlayer)["position"]!;
+        //     console.log("STRONK Lépés: " + move);
+        // } else {
+            move = takeARandomGuess(tiles);
+            // console.log("WIK Lépés: " + move);
+        // }
+        const newData = tiles.map((val, i)=>{
+            if(i === move){
+                return playerIcons[currentPlayer];
+            }
+            return val;
+        });
+        setTiles(newData);
+        //setCurrentPlayer(1);
+    }
+  },[currentPlayer]);
 
   
   const PlayerIcon1 = playerIcons[1];
