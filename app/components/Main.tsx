@@ -178,6 +178,7 @@ const [isAIStronk,setIsAIStronk] = useState(false);
       points={points}
       setPoints={setPoints}
       isAI={isAI}
+      isAIStronk={false}
       />
     </div>
   );

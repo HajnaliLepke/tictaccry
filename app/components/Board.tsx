@@ -15,6 +15,7 @@ interface BoardProps {
     points:{1:number,2:number,"T":number};
     setPoints:Dispatch<SetStateAction<{1:number,2:number,"T":number}>>;
     isAI:boolean;
+    isAIStronk:boolean;
 }
 
 const Board:React.FC<BoardProps> = ({
@@ -25,10 +26,17 @@ const Board:React.FC<BoardProps> = ({
     setTiles,
     points,
     setPoints,
-    isAI
+    isAI,
+    isAIStronk
 }) => {
 
   const [currentPlayer, setCurrentPlayer] = useState<1|2>(1);
+
+  function takeARandomGuess(new_tiles:IconType[]){
+    const empties:any = new_tiles.map((t,i)=>{return t===null && i});
+    const guess = empties[Math.floor(Math.random()*empties.length)];
+    return guess;
+  }    
 
   function worldDominationNextLevel200IQApocalypseRobotMoveCalulator(new_tiles:IconType[]|null, player:1|2){
     const max_player = 2;
@@ -174,6 +182,25 @@ const Board:React.FC<BoardProps> = ({
     }
 
   },[tiles]);
+
+//   useEffect(()=>{
+//     if(currentPlayer === 2 && isAI){
+//         let move:number;
+//         // if (isAIStronk){
+//         //     move = worldDominationNextLevel200IQApocalypseRobotMoveCalulator(tiles,currentPlayer)["position"]!;
+//         // } else {
+//             move = takeARandomGuess(tiles);
+//         // }
+//         const newData = tiles.map((val, i)=>{
+//             if(i === move){
+//                 return playerIcons[currentPlayer];
+//             }
+//             return val;
+//         });
+//         setTiles(newData);
+//         setCurrentPlayer(1);
+//     }
+//   },[currentPlayer]);
 
   
   const PlayerIcon1 = playerIcons[1];
