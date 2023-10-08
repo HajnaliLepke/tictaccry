@@ -77,7 +77,7 @@ const SideMenu:React.FC<SideMenuProps> = ({
     {/* SETTINGS */}
     <div 
     className={        
-        `fixed top-[90px] left-1 p-5 z-40
+        `fixed top-[90px] left-1 p-5 z-20
         flex flex-col items-center justify-center
         ${settingsActive ?  'opacity-70'  : 'opacity-90'}
         cursor-pointer hover:scale-110 hover:opacity-100 transition-all 
@@ -86,7 +86,7 @@ const SideMenu:React.FC<SideMenuProps> = ({
     onClick={toggleSettings}
     >
       <IoMdSettings size={45} style={{color:"white"}}/>
-      <h3 className='text-white text-xl pt-0 z-40'>Settings</h3>
+      <h3 className='text-white text-xl pt-0 z-20'>Settings</h3>
     </div>
      {
         colorPickerActive && ( 
