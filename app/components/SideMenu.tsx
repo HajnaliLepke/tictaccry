@@ -232,6 +232,7 @@ const SideMenu:React.FC<SideMenuProps> = ({
                 {/* AI-POWER */}
                 {
                     isAI ? (
+  
                     <div className='flex flex-col justify-evenly items-center gap-9  w-1/3'> 
 
                             <div className='relative'>
@@ -249,13 +250,21 @@ const SideMenu:React.FC<SideMenuProps> = ({
                     </div>    
                     <div>
                     {/* <!-- Rounded switch --> */}
-                    <label className="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" className="sr-only peer" onClick={()=>{setIsAIStronk(!isAIStronk)}}/>
+                    <label className="relative inline-flex items-center ">{/*"cursor-pointer">*/}
+                    <input type="checkbox" value="" className="sr-only peer" disabled
+                    onClick={()=>{
+                        // setIsAIStronk(!isAIStronk)
+                        }}/>
                     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-slate-700 rounded-full peer dark:bg-gray-400 peer-checked:after:translate-x-full peer-checked:after:border-slate-800 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-800/70 after:border-slate-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-700"></div>
                     <span className={`ml-3 text-sm font-medium  ${isAIStronk ? " text-red-700 dark:text-red-700" : " text-gray-900 dark:text-gray-300" }`}>Unbeatable AI</span>
                     </label>   
                     </div>    
 
+                    <div 
+                    className='
+                    absolute rotate-[12deg] text-xl bottom-[6.5rem] sm:bottom-[6.5rem] md:bottom-[6.5rem] lg:bottom-[3.5rem]
+                    font-bold text-red-500 border-4 rounded-lg border-red-500 p-1
+                    '>COMING SOON</div>
                     </div> 
                     ) : (<div className='flex flex-col justify-evenly items-center gap-9  w-1/3'>  </div> )
                 }
