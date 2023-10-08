@@ -6,6 +6,7 @@ import Board from './Board';
 import IconPicker from './SideMenu';
 import ExitMenu from './ExitMenu';
 import EndGameMenu from './EndGameMenu';
+import { FaFaceSadCry } from "react-icons/fa6";
 
 // ICONS
 import { AiOutlineClose } from "react-icons/ai";
@@ -26,6 +27,8 @@ import { IconType } from 'react-icons';
 
 
 export default function Main() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const icons = [
     AiOutlineClose,
     FaRegCircle,
@@ -101,6 +104,11 @@ const [isAIStronk,setIsAIStronk] = useState(false);
     }
   },[isPlaying]);
 
+  useEffect(
+    () => {
+      setIsLoading(false);
+    },[]);
+
   return (
     <div className='
     h-full w-full 
@@ -110,6 +118,21 @@ const [isAIStronk,setIsAIStronk] = useState(false);
     items-center
     justify-center
     '>
+        {
+          isLoading && (
+
+            <div id='loader'
+            className=
+            "h-full w-full fixed bg-slate-700 flex flex-col items-center justify-center z-50 gap-8">
+            <div className=" animate-spin-slow duration-100">
+                <FaFaceSadCry size="7rem" style={{color:"white"}}/>
+            </div>
+            <div className='text-white text-5xl '>
+              Loading
+            </div>
+        </div>
+          )
+        }
 
       {
         winner ?  (
