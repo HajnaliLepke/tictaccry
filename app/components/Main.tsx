@@ -104,10 +104,10 @@ const [isAIStronk,setIsAIStronk] = useState(false);
     }
   },[isPlaying]);
 
-  useEffect(
-    () => {
-      setIsLoading(false);
-    },[]);
+  // useEffect(
+  //   () => {
+  //     setIsLoading(false);
+  //   },[]);
 
   return (
     <div className='
@@ -127,8 +127,13 @@ const [isAIStronk,setIsAIStronk] = useState(false);
             <div className=" animate-spin-slow duration-100">
                 <FaFaceSadCry size="7rem" style={{color:"white"}}/>
             </div>
-            <div className='text-white text-5xl '>
-              Loading
+            <div className='text-white text-5xl flex flex-row pl-5'>
+            {
+              ["L","O","A","D","I","N","G",".",".","."].map((l,i)=>{
+                // return <h1 key={i} className={`animate-[bounce_1s_infinite_${i*0.1}ms]`}>{l}</h1>
+                return <h1 key={i} className={`animate-bounce animation-delay-${i}!important`}>{l}</h1>
+              })
+            }
             </div>
         </div>
           )

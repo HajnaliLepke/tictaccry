@@ -2,3 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .animation-delay-1 {
+      animation-delay: 100ms!important;
+    }
+    .animation-delay-2 {
+      animation-delay: 200ms!important;
+    }
+    .animation-delay-3 {
+      animation-delay: 300ms!important;
+    }
+    .animation-delay-4 {
+      animation-delay: 400ms!important;
+    }
+    .animation-delay-5 {
+      animation-delay: 500ms!important;
+    }
+    .animation-delay-6 {
+      animation-delay: 600ms!important;
+    }
+    .animation-delay-7 {
+      animation-delay: 700ms!important;
+    }
+    .animation-delay-8 {
+      animation-delay: 800ms!important;
+    }
+    .animation-delay-9 {
+      animation-delay: 900ms!important;
+    }
+    .animation-delay-10 {
+      animation-delay: 1000ms!important;
+    }
+  }
