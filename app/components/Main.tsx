@@ -3,7 +3,7 @@
 import { useEffect, useCallback ,useState } from 'react';
 
 import Board from './Board';
-import IconPicker from './IconPicker';
+import IconPicker from './SideMenu';
 import ExitMenu from './ExitMenu';
 import EndGameMenu from './EndGameMenu';
 
@@ -22,6 +22,8 @@ import { PiBabyBold, PiFlyingSaucerThin,PiHandEye } from "react-icons/pi";
 import { RiVirusFill } from "react-icons/ri";
 import { SiLetsencrypt } from "react-icons/si";
 import { TbEyeglass2 } from "react-icons/tb";
+import { IconType } from 'react-icons';
+
 
 export default function Main() {
   const icons = [
@@ -69,6 +71,23 @@ const [winner,setWinner] = useState<undefined|1|2|"T">(undefined);
 const [isPlaying,setIsPlaying] = useState<boolean>(false);
 const [tiles,setTiles] =  useState(Array(9).fill(null));
 const [points,setPoints] = useState({1:0,2:0,"T":0})
+const [isAI,setIsAI] = useState(true);
+const [isAIStronk,setIsAIStronk] = useState(false);
+
+  function randomizeIcons(){
+    let player1:IconType,player2:IconType;
+    let i_1 = Math.floor(Math.random() * icons.length);
+    let i_2;
+    do {
+      i_2 = Math.floor(Math.random() * icons.length);
+    } while(i_1 === i_2);
+
+    player1 = icons[i_1];
+    player2 = icons[i_2!];
+    
+    const new_playerIcons = {1:player1!,2:player2!,"T":"T"};
+    setPlayerIcons(new_playerIcons);
+  }
 
   useEffect(()=>{
     if(!isPlaying){
@@ -101,12 +120,20 @@ const [points,setPoints] = useState({1:0,2:0,"T":0})
         ) :
         (
 
+
           !isPlaying ? (
+            
             <IconPicker 
             icons={icons}
             playerIcons={playerIcons}
             setPlayerIcons = {setPlayerIcons}
+            isAI={isAI}
+            setIsAI={setIsAI}
+            isAIStronk={isAIStronk}
+            setIsAIStronk={setIsAIStronk}
+            randomizeIcons={randomizeIcons}
             />
+
             ) : (
               <ExitMenu
               setIsPlaying={setIsPlaying}
@@ -122,6 +149,7 @@ const [points,setPoints] = useState({1:0,2:0,"T":0})
       setTiles={setTiles}
       points={points}
       setPoints={setPoints}
+      isAI={isAI}
       />
     </div>
   );

@@ -37,8 +37,8 @@ const EndGameMenu:React.FC<EndGameMenuProps> = ({setIsPlaying,winner:Winner}) =>
             {Winner !== "T" 
             ? 
                 <div className="flex flex-row items-center justify-center">
-                    <Winner size={"7rem"}/>
-                    <h3 className=' text-3xl  text-center'> WINS!!!</h3>
+                    <Winner style={{color:"white"}} size={"7rem"}/>
+                    <h3 className=' text-3xl  text-center pl-7 text-white'> WINS!!!</h3>
                 </div>
             :    
                 <div className="flex flex-row items-center justify-center">
@@ -56,4 +56,4 @@ const EndGameMenu:React.FC<EndGameMenuProps> = ({setIsPlaying,winner:Winner}) =>
   )
 }
 
-export default EndGameMenu
+export default EndGameMenu;

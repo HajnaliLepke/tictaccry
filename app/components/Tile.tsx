@@ -18,7 +18,7 @@ const Tile:React.FC<TileProps> =({
   //const iconstyle = { color: "white", size: "8rem" };
   return (
     <div 
-    className='w-full h-full bg-slate-700 flex items-center justify-center'
+    className='w-full h-full bg-slate-700 flex items-center justify-center cursor-pointer'
     onClick={Icon ? undefined : onClick} //Can't click if it already has an Icon 
     >
       {
