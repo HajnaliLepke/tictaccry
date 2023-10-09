@@ -136,7 +136,8 @@ const [isAIStronk,setIsAIStronk] = useState(false);
             {
               ["L","O","A","D","I","N","G",".",".","."].map((l,i)=>{
                 // return <h1 key={i} className={`animate-[bounce_1s_infinite_${i*0.1}ms]`}>{l}</h1>
-                return <h1 key={i} className={`animate-bounce animation-delay-${i}!important`}>{l}</h1>
+                const anim_string = String(i*0.1) + "s";
+                return <h1 key={i} className={`animate-bounce`} style={{animationDelay:anim_string}}>{l}</h1>
               })
             }
             </div>
